@@ -26,3 +26,14 @@ const generateNewNotes = function (body, notesArr) {
     );
     return note;
 };
+
+/* Route GET method */
+app.get('/api/notes', (req, res) => {
+    res.json(notes); 
+});
+
+/* Route POST method to store data server-side. */
+app.post('/api/notes', (req, res) => {
+    req.body.id = notes.length.toString();
+}); 
+
