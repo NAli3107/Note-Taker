@@ -12,3 +12,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded ({ extended: true }));
 app.use(express.static('public')); 
+
+/* Requesting data. */
+const { notes } = require('./db');
+
+const generateNewNotes = function (body, notesArr) {
+    const note = body;
+    notesArr.push(note);
+
+    fs.writeFileSync(
+        path.join(__dirname, './db.json'),
+        JSON.stringify({ notes : notesArr }, null, 2)
+    );
+    return note;
+};
