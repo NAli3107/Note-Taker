@@ -4,12 +4,12 @@ const path = require("path")
 
 /* Route to call html homepage */
 
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 //call for notes.html
-router.get("/notes", function (req, res) {
+router.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 
-module.exports = router
+module.exports = router;

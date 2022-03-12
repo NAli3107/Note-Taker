@@ -3,9 +3,9 @@ const router = express.Router()
 const fs = require("fs")
 const uuid = require("uuid");
 
-/* Get function to add routes */
+/* Get function  */
 router.get("/api/notes", (req, res) => {
-    fs.readFile("db/db.json","utf-8",(err,data)=>{
+    fs.readFile("../db/db.json","utf-8",(err,data)=>{
         if (err){
             console.log(err) 
         } else{
@@ -15,21 +15,21 @@ router.get("/api/notes", (req, res) => {
 });
 
 /* Post function to add new notes */
-router.post("/notes", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const newNotes = req.body;
-    newNotes.id = uuid.v4();
-    notes.push(newNotes);
-    fs.writeFileSync("./db/db.json", JSON.stringify(notes))
-    res.json(notes);
+router.post("/api/notes", (req, res) => {
+    const note = JSON.parse(fs.readFileSync("../db/db.json"));
+    const newNote = req.body;
+    newNote.id = uuid.v4();
+    note.push(newNote);
+    fs.writeFileSync("../db/db.json", JSON.stringify(note))
+    res.json(note);
 });
 
 /* Delete method to remove notes.*/
-router.delete("/notes/:id", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const delNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
-    fs.writeFileSync("./db/db.json", JSON.stringify(delNote));
-    res.json(delNote);
+router.delete("/api/notes/:id", (req, res) => {
+    const note = JSON.parse(fs.readFileSync("./db/db.json"));
+    const deleteNote = note.filter((removeNote) => removeNote.id !== req.params.id);
+    fs.writeFileSync("../db/db.json", JSON.stringify(deleteNote));
+    res.json(deleteNote);
 })
 
 module.exports = router
