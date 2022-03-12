@@ -15,7 +15,7 @@ router.get("/api/notes", (req, res) => {
 });
 
 /* Post function to add new notes */
-router.post("/api/notes", (req, res) => {
+router.post("/notes", (req, res) => {
     const notes = JSON.parse(fs.readFileSync("./db/db.json"));
     const newNotes = req.body;
     newNotes.id = uuid.v4();
@@ -25,7 +25,7 @@ router.post("/api/notes", (req, res) => {
 });
 
 /* Delete method to remove notes.*/
-router.delete("/api/notes/:id", (req, res) => {
+router.delete("/notes/:id", (req, res) => {
     const notes = JSON.parse(fs.readFileSync("./db/db.json"));
     const delNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
     fs.writeFileSync("./db/db.json", JSON.stringify(delNote));
